@@ -16,7 +16,6 @@ A web-based application built using Python and Flask to manage and automate a vi
 - [Usage](#usage)
 - [Features](#features)
 - [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 
 ---
@@ -91,11 +90,6 @@ Contributions are welcome!
 5.Open a Pull Request
 
 ---
-📄 License
-
-Distributed under the MIT License. See LICENSE for more information.
-
----
 
 📬 Contact
 
@@ -104,7 +98,4 @@ Prerna Agrawal
 💻 Project Repo: https://github.com/Prernaagrawal1/virtual-home-automation
 
 
----
-
-Let me know if you'd like to add sections like **Screenshots**, **Live Demo**, or **Troubleshooting Tips**. I can help with that too!
 
