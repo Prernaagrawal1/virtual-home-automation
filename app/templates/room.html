@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ room_name.capitalize() }} Control</title>
+    <style>
+        body {
+            background-image: url('/static/room_background.jpg'); /* Room-specific background image */
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            padding-top: 50px;
+        }
+        h1 {
+            font-size: 40px;
+            color: #FFD700;
+        }
+
+
+        .appliance {
+            margin: 20px auto;
+            padding: 20px;
+            width: 250px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+.appliance button {
+            width: 100%;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 20px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .appliance-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Control Appliances in the {{ room_name.capitalize() }}</h1>
+
+<li><a href="{{ url_for('main.room', room_name='kitchen') }}">Kitchen</a></li>
+<li><a href="{{ url_for('main.room', room_name='washroom') }}">Washroom</a></li>
+<li><a href="{{ url_for('main.room', room_name='livingroom') }}">Living Room</a></li>
+
+<script>
+        function toggleAppliance(roomName, appliance) {
+            fetch(`/api/toggle/${roomName}/${appliance}`, {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(`${appliance.capitalize()} in ${roomName.capitalize()} is now ${data[appliance] ? 'ON' : 'OFF'}`);
+            })
+            .catch(error => {
+                alert('Error toggling appliance');
+                console.error(error);
+            });
+        }
+    </script>
+</body>
+</html>
+

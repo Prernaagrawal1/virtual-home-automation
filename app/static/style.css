@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 50px;
+    background-image: url('/static/home-background.jpg'); /* Replace with the actual path to your image */
+    background-size: cover; /* Adjust as needed (e.g., contain, auto) */
+    background-repeat: no-repeat; /* Adjust as needed */
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.control-btn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.control-btn:hover {
+    background-color: #45a049;
+}
+
+#status {
+    margin-bottom: 20px;
+    font-size: 18px;
+}

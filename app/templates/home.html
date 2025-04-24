@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Room - Virtual Home Automation</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+        h1 {
+            color: #333;
+        }
+        .room-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .room {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 200px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .room img {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .room button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background-color: #a04552;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .room button:hover {
+            background-color: #45a049;
+        }
+        /* Appliance toggle styling */
+        .appliance-controls {
+            display: none;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+        .appliance-controls button {
+            padding: 8px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .appliance-controls button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Select a Room</h1>
+    <div class="room-container">
+        <!-- Living Room -->
+        <div class="room" id="living-room">
+            <img src="/static/living.jpg" alt="Living Room">
+            <button onclick="toggleAppliances('living-room')">Living Room Switch</button>
+            <!-- Appliance Controls for Living Room -->
+            <div class="appliance-controls" id="living-appliance-controls">
+                <button onclick="toggleSingleAppliance('living-room', 'light')">Toggle Light</button>
+                <button onclick="toggleSingleAppliance('living-room', 'fan')">Toggle Fan</button>
+                <button onclick="toggleSingleAppliance('living-room', 'ac')">Toggle AC</button>
+            </div>
+        </div>
+
+        <!-- Kitchen -->
+        <div class="room" id="kitchen-room">
+            <img src="/static/kitchen.jpg" alt="Kitchen">
+            <button onclick="toggleAppliances('kitchen-room')">Kitchen Switch</button>
+            <!-- Appliance Controls for Kitchen -->
+            <div class="appliance-controls" id="kitchen-appliance-controls">
+                <button onclick="toggleSingleAppliance('kitchen-room', 'light')">Toggle Light</button>
+                <button onclick="toggleSingleAppliance('kitchen-room', 'fan')">Toggle Fan</button>
+                <button onclick="toggleSingleAppliance('kitchen-room', 'ac')">Toggle AC</button>
+            </div>
+        </div>
+
+        <!-- Washroom -->
+        <div class="room" id="washroom-room">
+            <img src="/static/washroom.jpg" alt="Washroom">
+            <button onclick="toggleAppliances('washroom-room')">Washroom Switch</button>
+            <!-- Appliance Controls for Washroom -->
+            <div class="appliance-controls" id="washroom-appliance-controls">
+                <button onclick="toggleSingleAppliance('washroom-room', 'light')">Toggle Light</button>
+                <button onclick="toggleSingleAppliance('washroom-room', 'fan')">Toggle Fan</button>
+                <button onclick="toggleSingleAppliance('washroom-room', 'ac')">Toggle AC</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle appliance controls visibility
+        function toggleAppliances(roomId) {
+            const controls = document.getElementById(roomId + '-appliance-controls');
+            const isVisible = controls.style.display === 'flex';
+            // Toggle the visibility of the appliance controls
+            controls.style.display = isVisible ? 'none' : 'flex';
+        }
+
+        // Capitalize function for strings
+        String.prototype.capitalize = function() {
+            return this.charAt(0).toUpperCase() + this.slice(1);
+        }
+
+        // Function to toggle a single appliance and update button text
+        function toggleSingleAppliance(roomName, appliance) {
+            fetch(`/api/toggle/${roomName}/${appliance}`, {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                const isOn = data[appliance];
+                const roomDiv = document.getElementById(roomName);
+                const buttons = roomDiv.querySelectorAll('.appliance-controls button');
+
+                buttons.forEach(btn => {
+                    if (btn.textContent.toLowerCase().includes(appliance)) {
+                        btn.textContent = `${appliance.capitalize()}: ${isOn ? 'ON' : 'OFF'}`;
+                    }
+                });
+            })
+            .catch(error => {
+                alert('Error toggling appliance');
+                console.error(error);
+            });
+        }
+    </script>
+</body>
+</html>
+

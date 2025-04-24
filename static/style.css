@@ -1,0 +1,24 @@
+body {
+  font-family: Arial;
+  text-align: center;
+  background: #f7f7f7;
+}
+
+.room-card {
+  border: 1px solid #ccc;
+  margin: 10px auto;
+  padding: 20px;
+  border-radius: 15px;
+  width: 300px;
+  background: #fff;
+  box-shadow: 0 0 10px #ccc;
+}
+button {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
